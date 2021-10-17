@@ -1,0 +1,122 @@
+# edu
+
+1. switch 문에서 아래의 프로그래밍을 짜시오.
+	public static void main(String[] args) {
+		switch (5) {
+		case 1, 2, 3, 4:
+			System.out.println("봄입니다.");
+			break;
+		case 5, 6, 7, 8:
+			System.out.println("여름입니다.");
+			break;
+		case 9, 10, 11, 12:
+			System.out.println("겨울입니다.");
+			break;
+
+		default:
+			System.out.println("잘못된값입니다");
+		}
+	}
+}
+
+2. int num = -10 을 할당 후 해당 정수에 대한 절댓값을 출력하는 프로그램을 작성하시오.
+public static void main(String[] args) {
+	int num = -10;
+	int num1 = 0;
+	
+	if (num<0) {
+		num1 = -(num);
+	} else {
+		num1 = (num);
+		
+	}
+	System.out.println(num + "의 절대값:" + num1);
+	}
+
+}
+
+3.3. while문과 do while문의 차이는 무엇인가요?
+while(반복조건){반복영역}
+-조건검사
+-결과가 TRUE이면, 중괄호 영역 실행
+
+do{반복영역}while(반복조건)
+-중괄호 영역 실행
+-조건 검사 후, 결과가 TRUE이면 반복 결정
+
+4.아래에서 for문이 실행 되는 순서를 정리하시오 
+for (i = 1; i <= 1000; i++){
+sum = sum +i
+}
+i=1;
+i <=1000; 
+{} 안의 내용을 실행 후 i++ 
+i<=1000; 이 false가 나올때까지 반복 실행
+
+5.구구단 6단을 출력 하는 프로그램을 짜시오.
+
+int dan = 6;
+for (int i = 1 ; i <= 9 ; i++) {
+system.out.println(dan + "*" + i + "=" + dan*i);
+         }
+     }
+}
+
+6.1부터 10000까지의 합을 구하는 포르고램을 짜시오.
+
+public static void main(String[] args) {
+		int sum = 0;
+		for (int i = 1; i <= 10000; i++) {
+			sum+=i;						
+		}
+		System.out.println("1부터 10000까지의 합은" + sum + "입니다");		
+	}		
+}
+1부터 10000까지의 합은 50005000 입니다.
+
+7.1부터 10000 까지의 숫자중 홀수의 합을 구하는 프로그램을 짜시오.
+
+public static void main(String[] args) {
+		int sum = 0;
+		for (int i = 1; i <= 10000; i++) {
+			if ((i%2)==1)
+			sum+=i;						
+		}
+		System.out.println("1부터 10000까지 중 홀수의 합은" + sum + "입니다");
+		
+		
+		
+	}		
+}
+1부터 10000까지 중 홀수의 합은? 25000000
+
+8.break와 continue 에 대해여 설명하시오.
+break문은 for,while do-while문의 실행을 중지 할때 사용한다. switch에서도 break를 사용하여 종료한다
+continue문은 for,while do-while문에서만 사용된다. for문에서는 증감식 while.do-while에서는 조건식으로 이동한다
+
+9.1과 100 사이의 숫자중 5의 배수이자 7의 배수의 첫번째 수를 프로그래밍 하시오.
+
+for (int i = 1; i <= 100; i++) {
+			if ((i % 5 == 0) && (i % 7 == 0)) {
+				System.out.println("1과 100사이에 숫자중 5의배수이자 7의 배수인 첫번째수는?" + i);
+				break;
+			}
+		}
+	}
+}
+1과 100 사이에 숫자 중 5의 배수이자 7의 배수인 첫번째 수는? 35
+
+10.1과 10000 사이의 숫자중 5의 배수이자 7의 배수인 수의 갯수를 프로그래밍하시오.
+
+public static void main(String[] args) {
+	int count =0;
+	for (int i = 1; i <= 10000; i++) {
+		if((i%5!=0)||(i%7!=0)) {
+			continue;
+		}
+		count++;
+	}
+	System.out.println("1부터 10000 사이에 5의 배수,7의 배수의 갯수는?" + count + "개");
+	}
+}
+1부터 10000 사이에 5의 배수,7의 배수의 갯수는?285개
