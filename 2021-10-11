@@ -1,0 +1,210 @@
+# edu
+
+1.함수는 어떻게 알아 볼수 있는가?
+괄호로 시작 되는부분이 함수이다.
+
+2.함수 호출하는 법은?
+메소드를 호출하는 법은 메소드명();으로 호출한다.
+
+3.함수 만드는 법은?
+
+4.리턴 타입 void는 어떠한 경우에 쓰는가?
+void가 들어가는 경우는 return에 받는 데이터가 없을 때 사용된다.
+
+5.아래를 함수로 만드시오 .
+*****
+ ****
+  ***
+   **
+    *
+    public static void main(String[] args) {
+		starPoint(5);
+
+	}
+
+	public static void starPoint(int num) {
+
+		for (int i = 1; i <= num; i++) {
+			for (int j = 1; j < i; j++) {
+				System.out.print(" ");
+			}
+			for (int j = num; j >= i; j--) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+}
+
+
+6. 아래를 함수로 만드시오.
+
+starPrint3(5) 
+
+출력
+   
+    *   
+   ***
+  *****
+ *******
+*********
+
+	
+			starPoint(5);
+		
+	}
+	public static void starPoint(int num) {
+		
+		for(int i =1;i<=num;i++) {
+			for(int j =num;j>i;j--) {
+				System.out.print(" ");
+			}
+			for(int j =1;j<i+i;j++) {
+			System.out.print("*");
+		}System.out.println();
+	}
+  
+7.아래의 함수를 만드시오. 		
+
+char grade;
+double avg = 80;
+
+grade = getGrade(avg);
+
+// 우 입니다.
+System.out.println(grade + " 입니다.");
+
+	char grade;
+		double avg = 80;
+		
+		grade = getGrade(avg);
+		System.out.println(grade + " 입니다");
+	}
+	public static char getGrade(double avg) {
+		char result;
+		if(avg>=90) {
+			result = '수';
+		}else if(avg>=80) {
+			result = '우';
+		}else {
+			result = '미';
+		}
+		return result;
+    
+ 8.아래의 함수를 만드시오. 
+
+int sum = getHap(1,100);
+//5050
+System.out.println(sum);
+int count = get57(1,100);
+System.out.println(count );
+	
+	int sum = getHap(1,100);
+		
+		System.out.println(sum);
+		
+		int count = get57(1,100);
+		
+		System.out.println(count);
+	}
+	public static int getHap(int start,int end) {
+		int result=0;
+		for(int i =start;i<=end;i++) {
+			result +=i;
+		}return result;
+    
+9.아래의 함수를 만드시오. 
+
+printGuGudan(3)// 3단 출력
+printGuGudan(4)// 4단 출력
+
+
+			printGrade(5);
+
+	}
+	public static void printGrade(int dan) {
+
+		for(int i=1;i<=9;i++) {
+			for(int j=1;j<=9;j++) {
+				if(i-num==0) {
+				System.out.println(i + "x" + j +"="+ i*j);
+			}
+		}
+			
+	}
+	}
+	
+	public static int get57(int start,int end) {
+		
+		int count=0;
+		for(int i = start; i <= end; i++) {
+			if((i%5==0)&&(i%7==0)) {
+				count++;
+			}
+		}return count;
+    
+10.아래의 함수를 만드시오. 
+
+getRecArea(3,5) //삼각형 넓이
+getRecCirlce(5) //원넓이
+getTriangleArea(4 , 5) //삼각형 넓이
+
+			double area1,area2,area3;
+
+		area1 = getRecArea(3,5); // 사각형의 넓이
+		area2 = getRecCircle(5);
+		area3 = getTriangleArea(4,5);
+		
+		System.out.println(area1);
+		System.out.println(area2);
+		System.out.println(area3);
+}
+	public static double getRecArea(double n1,double n2) {
+		double area= n1*n2;
+		return area;
+	}
+	public static double getRecCircle(double r) {
+		final double PI = 3.14;
+		double result = r*r*PI;
+		return result;
+	}
+	public static double getTriangleArea(double n1,double n2) {
+		double area= (n1*n2)/2;
+		return area;
+    
+11.함수로 만들면 좋은점은?
+-같은 작업을 하지 않을수 있다.
+-두번 이상의 작업을 해야할 경우 함수로 만들면 시간을 단축 시킬수있다.
+
+12.아래의 함수를 만드시오.
+3~5월:봄 6~8월: 여름 9~11:가을 12~2월:겨울
+int month;
+
+public static void main(String[] args) {
+		getSeason(1);
+		getSeason(10);
+		getSeason(50);
+
+	}
+
+	public static void getSeason(int month) {
+		switch (month) {
+		case 3, 4, 5:
+			System.out.println("봄입니다" + month);
+			break;
+		case 6, 7, 8:
+			System.out.println("여름입니다" + month);
+			break;
+		case 9, 10, 11:
+			System.out.println("가을입니다" + month);
+			break;
+		case 12, 1, 2:
+			System.out.println("겨울입니다" + month);
+			break;
+		default:
+			System.out.println("잘못된 값입니다.");
+			break;
+		}
+
+	}
+}
