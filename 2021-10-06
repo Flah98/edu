@@ -1,0 +1,131 @@
+# edu
+
+1.아래가 에러가 나는 이유를 설명하고, 수정 하시오(형변환으로 설명)
+short num =1;
+short num = -num;
+-num은 시스템 내부에서 (-1)*(num)으로 연산 되기 때문에 short에서 int로 자동형변환이 되어서 short에서 num을 담을수 없어서 
+명시적으로 num =(short)-num으로 표현해줘야 한다.
+
+2.전위 증가 연산자와 후위 증가 연산자의 차이는 ?
+전위 연산자는 먼저 연산 후 출력이 되어 코드 입력 후 출력물에 전위 연산이 바로 반영되지만 
+후위 연산자는 출력 후 연산이 되기 때문에 후위 연산자는 코드를 입력 한 뒤 출력물에 후위 연산이 바로 반영되지 않는다.
+
+3.아래의 비트 연산자 4가지를 설명하시오
+& 대응되는 비트가 모두 1이면 1을 반환함(비트AND연산)
+| 대응되는 비트 중에서 하나라도 1이면 1을 반환함(비트OR연산)
+^ 대응되는 비트가 서로 다르면 1을 반환함 (비트XOR연산)
+~ 비트를 1이면 0으로 0이면 1로 반전시킴(비트 NOT 연산,1의보수)
+
+4.시프트 연산자에 대하여 설명하시오.
+왼쪽 시프트 연산자는<<는 지정한 수만큼 피연산자의 모든 비트를 전부 왼쪽으로 이동시킨다.
+이때 비트의 이동으로 새로 생기는 오른쪽 비트들은 언제나 0으로 채위진다.
+모든 비트가 한 비트 씩 왼쪽으로 이동할 때마다 그 값은 2배씩 증가한다.
+
+오른쪽시프트 연산자는>>는 지정한 수만큼 피연산자의 모든 비트를 전부 왼쪽으로 이동시킨다.
+이때 비트의 이동으로 새로 생기는 왼쪽 비트들은 양수일 경우에는 모두 0으로 채워지며 음수일 경우에는 모두 1로 채워진다
+모든 비트가 한 비트씩 오른쪽으로 이동할 때마다 그 값은 2배씩 감소한다.
+
+5.아래의 출력값을 예측하시오.
+class AssignSteResult {
+	public static void main(String[] args) {
+		int num1 = 10, num2 = 20, num3 = 30;
+		num1 = num2 = num3;    
+
+		/*
+      = 연산자는 결합 방향이 오른쪽에서 왼쪽으로 진행된다.  ->
+      따라서 위의 문장은 다음과 같다. 
+      num1 = (num2 = num3);        
+    */
+    
+    System.out.println(num1);	
+    System.out.println(num2);
+    System.out.println(num3);
+	}
+}
+= 30,30,30
+
+6.아래의 출력값을 예측하시오.
+class AddNum {
+	public static void main(String[] args) {
+		int result = 3 + 6;
+		System.out.println("3 + 6 = " + result);  
+  
+		result += 9;
+    System.out.println("3 + 6 + 9 = " + result);
+    
+    result += 12;
+    System.out.println("3 + 6 + 9 + 12 = " + result);
+	}
+}
+3 + 6 = 9
+3 + 6 + 9 = 18
+3 + 6 + 9 + 12 = 30
+
+7.조건문의 3가지 종류를 나열하고 설명하시오.
+if문- if문은 괄호안의 조건이 충족되면 코드 블록 안의 내용을 실행 시킨다.
+else if 문의 조건이 false일때 실행된다.
+else if- if문 외에 조건을 추가 할 때 사용
+
+8.아래의 프로그램을 짜시오.
+국어:80 수학:80 영어:60 총점과 평균을 출력하고 평균에 따른 수우미양가를 출력 하시오.
+
+class Study {
+	public static void main(String[] args) {
+ int kor = 80;
+		int math = 80;
+		int eng = 60;
+		int total = kor + math + eng;
+		double avg = (double) total / 3;
+
+		System.out.println("세 과목의 총점은?" + total);
+		System.out.println("세 과목의 평균은?" + avg);
+
+		if (avg >= 90)
+			System.out.println("수 입니다");
+		else if (avg >= 80)
+			System.out.println("우 입니다");
+		else if (avg >= 70)
+			System.out.println("미 입니다");
+		else if (avg >= 60)
+			System.out.println("양 입니다");
+		else 
+			System.out.println("가 입니다");
+
+	}
+
+}
+세 과목의 총점은?220
+세 과목의 평균은?73.33333333333333
+미 입니다
+
+9.int 변수 3개 선언 90 100 60 그 중 3개의 값중 최대값을 출력 하시오
+public static void main(String[] args) {
+		int num1 = 100;
+		int num2 = 90;
+		int num3 = 60;
+		
+		if (num1>num2 && num1>num3) {
+			System.out.println("최대값은" + num1 + "입니다");
+		}else if
+		 (num2>num1 && num2>num3) {
+			System.out.println("최대값은" + num2 + "입니다");
+		}
+		else {
+			System.out.println("최대값은" + num3 + "입니다");
+		}
+	}
+  
+  10.int 변수 선언 후 임의로 값을 넣고 해당 값이 짝수 이면 "짝수 입니다" 출력, 해당 값이 홀수이면"홀수입니다"출력하시오
+  public static void main(String[] args) {
+		int num = 7;
+		if ((num%2)==0) {
+			System.out.println("num은 짝수 입니다.");
+			
+		}
+		else 
+			System.out.println("num은 홀수 입니다.");
+	}
+
+}
+
+  
