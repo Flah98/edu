@@ -1,0 +1,147 @@
+# edu
+1.변수의 스코프에 대하여 설명하시오.
+-프로그램상에서 사용되는 변수들은 사용가능한 범위를 갖는데 그 범위를 변수의 스코프라고 한다.
+
+2.지역변수란?
+-메소드 영역안에 있는 변수
+-메소드 영역이 끝나면 실행할수없다.
+-초기화를 하지 않으면 값이 들어가지 않으므로 꼭 초기화를 해야한다.
+
+3.인스턴스 변수란 ?
+-클래스 내에 선언된 변수 
+-객체 생성 시마다 매번 새로운 변수가 생성되고 인스턴스 변수는 초기화를 하지 않아도 변수의 타입에 맞게 자동으로 초기화 된다.
+
+4. 아래의 함수를 펙토리얼로 표현하시오.
+System.out.println("3 factorial: " + factorial(3));
+System.out.println("3 factorial: " + factorial(12));
+
+public static void main(String[] args) {
+		System.out.println("3 factrorial: " + factorial(3));
+		System.out.println("12 factrorial: " + factorial(12));
+	}
+	public static int factorial(int n) {
+		if(n==1) {
+			return 1;			
+		}
+		else {}
+		return n*factorial(n-1);
+	}
+}
+
+5.클래스의 구성요소는?
+field:객체의 데이터가 저장되는 곳
+Constructor: 객체 생성 시 초기화 역할
+Method: 객체의 동작에 행다하는 실행 블록
+
+6.원의 넓이는 구하는 프로그램을 아래와 같이 작성하시오.
+  - 원클래스를 만들것
+    - 변수 radius
+    - 변수 radius에 대한 setter getter 함수 만들것
+    - getArea 함수
+  
+  -메인 메소드를 가진 다른 클래스(AreaTest)에서 원 객체를 생성할것
+  
+  class AreaTest{
+	int radius;
+	
+	public int getRadius(){
+		return radius;
+	}
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+	public double getarea() {
+		return radius*radius*Math.PI;
+	}
+}
+public class study {
+
+	public static void main(String[] args) {
+		AreaTest areatest = new AreaTest();
+		areatest.getRadius();
+		areatest.setRadius(1);
+		System.out.println(areatest.getarea());
+		
+	}
+
+}
+
+7.객체에 대하여 설명하시오.
+객체의 개념
+-소프트웨어 세계에 구현할 대상
+=클래스에 선언된 모양 그대로 생성된 실체
+객체의 특징
+클래스의 인스턴스(instance)라고 부른다.
+-객체화 시켜 메모리의 올리는 것 또한 객체 라고한다
+
+8.클래스와 객체의 차이는?
+가장 큰 차이는 메모리의 공간의 할당이라고 볼 수 있다.
+
+10.아래의 프로그램을 작성하시오.
+public class SumMain {
+
+    public static void main(String[] args) {
+
+        GetSum getsum = new GetSum(); //1)객체 생성
+         int num; //2)num 변수 선언
+         num = 50;
+
+         getsum.setNum(num); //3)getsum 객체의 setNum함수 호출, num값 50 저장
+         getsum.sum(); //4)getsum객체의 sum함수 호출, 1-50까지 합 구함
+      }
+}
+
+	int num;
+	int sum=0;
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+		
+	}
+	public int sum() {
+		for(int i = 1; i<=num; i++) {
+			sum = sum + i;
+		}
+		return sum;
+	}
+public class ffss22 {
+
+	public static void main(String[] args) {
+		AreaTest getsum = new AreaTest();
+		getsum.setNum(50);
+		
+		System.out.println(getsum.getNum());
+		System.out.println(getsum.sum());
+	}
+		
+	}
+
+}
+
+11.아래의 프로그래밍을 작성하시오.
+ 
+Gugudan gugudan = new Gugudan();
+gugudan.printGugu(10); //1단부터 10단까지 출력
+gugudan.printGugu(20); //1단부터 20단까지 출력
+
+int num;
+	public void printGugudan(int num) {
+		for (int i = 1 ; i <=9; i++) {
+			for(int j= i; j <=num; j++) {
+				System.out.print(j+"x" +i+"=" +(i*j)+ " ");
+				System.out.println();
+			}
+		}
+	
+	public static void main(String[] args) {
+		printGugudan gugudan = new printGugudan();
+		gugudan.printGugudan(10);
+		gugudan.printGugudan(20);
+		
+	
+		
+	}
+}	
+	}
