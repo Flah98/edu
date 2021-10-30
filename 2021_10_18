@@ -1,0 +1,199 @@
+# edu
+
+1. 메소드 오버로딩에 대하여 설명하시오.
+클래스 내에 같은 이름의 메소드를 여러개 선언 하는 것을 오버로딩 이라고 한다.
+
+이때의 메소드 들은 
+		메소드 이름은 동일 하고,
+		입력 파라메터의 Type이나 갯수는 다르다.	
+		
+		( 참고로, 리턴값이 다른 것은 오버로딩에 해당 하지 않는다.)
+    
+2. 메소드 오버로딩을 적용한 대표적인 함수는?
+System.out.println()
+
+3. this 함수에 대하여 설명하시오.
+생성자 오버로딩이 많아 질 경우 생성자 간의 중복된 코드가 발생할 수 있다.
+(예를 들면,  매개변수의 수 만 달라지고, 필드초기화 내용은 비슷한 경우 )
+
+이 경우에 필드초기화 내용은 한 생성자에만 집중적으로 작성하고,
+나머지 생성자는 초기화 내용을 가지고 있는 생성자를 호출하는 방법으로 개선 할 수 있다.
+
+생성자에서 다른 생성자를 호출할 때, this() 함수를 사용한다.
+
+this()는 자신의 다른 생성자를 호출하는 코드로, 반드시 생성자의 첫줄에서만 허용된다.
+
+4. this 의 용도는?
+클래스 필드에서 this가 붙으면 
+	메모리에 생성된 객체 자신의
+	인스턴스 변수가 되며,
+	용도는 생성자의 입력 파라메터와  인스턴스 변수 구분하는 용으로 사용한다.
+	
+this() 형태로 생성자에서 사용되면
+	객체 자신의 생성자를 의미 하며,
+	용도는 오버로딩에 의해서 많은 생성자가 만들어졌을때
+	생성자 안에서 생성자를 호출 해서
+	중복된 코드를 간략화 할때 사용한다.
+  
+  5. 스트링 객체를 생성하는 2가지 방법은 무엇인가?
+(1) String 변수에 곧바로  "스트링"을 대입해서  Instance Pool에 객체를 생성
+(2) new String()을 통해서 Heap에 객체를 생성
+
+6. 아래의 결과를 예측하고,이유를 설명하시오.
+String str1 = "Simple String"; 
+String str2 = "Simple String";
+
+
+String str3 = new String("Simple String");
+String str4 = new String("Simple String");
+
+//참조변수의 참조 값 비교
+if(str1 == str2)
+   System.out.println("str1과 str2는 동일 인스턴스 참조");
+else
+   System.out.println("str1과 str2는 다른 인스턴스 참조");
+
+//참조변수의 참조 값 비교
+if(str3 == str4)
+   System.out.println("str3과 str4는 동일 인스턴스 참조");
+else
+   System.out.println("str3과 str4는 다른 인스턴스 참조");
+결과 예측 : 
+		str1과 str2는 동일 인스턴스 참조
+		str3과 str4는 다른 인스턴스 참조
+		
+		
+이슈 설명:
+	(1)str1과 str2는 동일 인스턴스 참조
+	
+		new를 사용하지 않은,
+		참조변수 str1, str2에 직접 동일한 스트링을 초기화한 경우에는
+		instance pool에 1개의 메모리만 할당하고
+		동일한 메모리 주소가
+		str1 과 str2에 들어 가게 됨.
+		
+	(2)str3과 str4는 다른 인스턴스 참조
+	
+		new String("스트링")을 통해서 객체를 생성하면
+		"스트링" 같다고 하더라도,
+		new에 의해서 메모리가 각각 할당되게 되고.
+		str3, str4 참조 변수에는 각각 다른 주소값이 들어가게 됨.
+    
+    7. imutable 에 대하여 설명하시오.
+imutable String 이란 
+메모리에 있던 String 의 원본을 훼손하지 않는 다는 의미이며,
+
+String간의 연산이나 수정이 있는 경우에
+기존의 할당된 메모리가 아닌
+새로운 메모리를 할당 받은뒤
+결과를 저장한다.
+
+8. 사용자로부터 받은 문자열(영문으로)에서 자음과 모음 개수를 계산하는 프로그램을 작성
+입력:abcd 
+출력:
+
+총글자수는 4개
+자음:3 개
+모음:1 개
+
+import java.util.Scanner;
+public class OTodayTest1 {
+	public static void main(String[] args) {
+		
+		System.out.println("영어 4글짜를 를 입력하세요");
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		char tmp;
+		int cnt_a = 0; 
+		int cnt_b = 0;
+		for(int i = 0; i<str.length(); i++) {
+			tmp = str.charAt(i);
+			if(tmp == 'a' || tmp == 'A' || 
+				tmp == 'e' || tmp == 'E' ||
+				tmp == 'i' || tmp == 'I' ||
+				tmp == 'o' || tmp == 'O' ||
+				tmp == 'u' || tmp == 'U' 
+				) {
+					cnt_a++;
+				
+			}else {
+				cnt_b++;
+			}
+		}
+		System.out.println("입력:" + str);
+		System.out.println();
+		
+		System.out.println("총글자수는 " + str.length() + "개");
+		System.out.println("자음:" + cnt_b + "개");
+		System.out.println("모음:" + cnt_a + "개");
+	}
+}	
+
+9. 사용자에게 받은 문자열을 역순으로 화면에 출력하는 프로그램을 작성하시오.
+
+작성:
+
+import java.util.Scanner;
+public class OTodayTest2 {
+	public static void main(String[] args) {
+		
+		System.out.println("영어 4글짜를 를 입력하세요");
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		char tmp;
+		for(int i = 0; i<str.length(); i++) {
+			tmp = str.charAt(i);
+		}
+		System.out.println("입력:" + str);
+		System.out.print("출력:");
+		for(int i = (str.length()-1); i>= 0; i--) {
+			tmp = str.charAt(i);
+			System.out.print(tmp);
+		}
+		System.out.println();
+		
+	}
+}
+
+10. 사용자로부터 키를 입력 받아서 표준 체중을 계산한 후에 사용자의 체중과 비교하여
+저체중인지, 표준 인지, 과체중인지를 판단하는 프로그램을 작성하라. 
+
+표준 체중 계산식은 다음을 사용하라.
+표준체중(kg) = ( 키(cm) - 100 ) * 0.9
+
+입력:
+키(cm)를 입력하세요. : 193
+체중(kg)을 입력하세요. : 25
+출력:
+표준 체중은 83.7입니다.
+당신은 저체중 입니다. 
+작성:
+import java.util.Scanner;
+public class OTodayTest3 {
+	public static void main(String[] args) {
+		
+		int tall;
+		int weight;
+		double standard_weight;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("키(cm)를 입력하세요. : ");
+		tall = sc.nextInt();
+		System.out.println(tall);
+		System.out.print("체중(kg)을 입력하세요. : ");
+		weight = sc.nextInt();
+		System.out.println(weight);
+		
+		System.out.println("출력:");
+		standard_weight = (tall - 100) * 0.9;
+		System.out.println("표준 체중은 " +  standard_weight + "입니다.");
+		if(weight >= standard_weight + 10)
+			System.out.println("당신은 고체중 입니다. ");
+		else if(weight >= (standard_weight - 10))
+			System.out.println("당신은 표준 체중 입니다. ");
+		else
+			System.out.println("당신은 저체중 입니다. ");
+			
+	}
+}
