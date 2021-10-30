@@ -1,0 +1,254 @@
+# edu
+1.static 변수의 다른 용어 3가지는?
+-공유변수
+-클래스변수
+-정적변수
+
+2.static 변수의 접근 방법은?
+Static 변수를 접근할 수 있는 방법 (1) 클래스변수 (2) 인스턴스 변수로 접근 가능
+
+3.static 변수의 활용의 예를 드시오.
+
+PI 변수 는 static변수의 대표적인 예로 들 수 있다.
+PI의 값은 고유의 값인 3.14----를 어느곳에서도 그 고유의 값을 공유하는 목적으로 사용하기 때문에 static을 이요한다.
+이 처럼 일정한 값이나 그 값을참조나 공유가 목적인 변수는 static을 활용하게 매번 메모리에 로딩하여 값을 읽어내는 것 보다는 훨씬 효율 적이고 메모리 절약할수있다.
+
+4.static 함수에 인스턴스가 올수 없는이유는?
+static에 인스턴스 변수가 올수 없는 이유는 객체가 생성되기전에 static이 메모리에 먼저 올라가기 때문에 그 이후에 변수가 선언된다면
+메모리 생성 시간차이가 발생해서 static에 변수가 올 수 없다.
+
+5.아래의 프로그램에서 기존에 값을 다이렉트로 넣었던 부분을 Scanner로 입력 받아 처리하시오 .
+int math, science, english;
+
+math = 90;
+
+science = 80; 
+
+english = 80;
+
+Grade me = new Grade(math, science, english);
+
+System.out.println("평균은 " + me.average());
+
+System.out.println(me.getGrade());
+
+
+?
+
+import java.util.Scanner;
+
+/*
+
+* int math, science, english;
+
+* math = 90;
+
+* science = 80; 
+
+* english = 80;
+
+* 
+
+* Grade me = new Grade(math, science, english);
+
+* System.out.println("평균은 " + me.average());
+
+* System.out.println(me.getGrade()); //우 입니다.
+
+* 
+
+*/
+
+class Grade {
+
+int math, science, english;
+
+public Grade(int math, int science, int english) {
+
+this.math = math;
+
+this.science = science;
+
+this.english = english;
+
+}
+
+public double average() {
+
+return (math + science + english) / 3.0;
+
+}
+
+public void getGrade() {
+
+double average = average();
+
+if (average >= 90) {
+
+System.out.println("수 입니다.");
+
+} else if (average >= 80) {
+
+System.out.println("우 입니다.");
+
+} else if (average >= 70) {
+
+System.out.println("미 입니다.");
+
+} else if (average >= 60) {
+
+System.out.println("양 입니다.");
+
+} else {
+
+System.out.println("가 입니다.");
+
+}
+
+
+}
+
+
+}
+
+
+public class Scanner_1015_No5 {
+
+
+public static void main(String[] args) {
+
+// TODO Auto-generated method stub
+
+Scanner sc = new Scanner(System.in);
+
+System.out.println("수학 과학 영어 점수를 입력하세요.");
+
+int math = sc.nextInt();
+
+int science = sc.nextInt();
+
+int english = sc.nextInt();
+
+
+Grade me = new Grade(math, science, english);
+
+System.out.println(me.average());
+
+
+me.getGrade(); 
+
+}
+
+
+}
+6.가위바위보 프로그램을 짜시오.
+
+import java.util.Scanner;
+public class 자바조건문문제3 {
+	
+	public static void main(String[] args) {
+		
+		
+		Scanner scan=new Scanner(System.in);
+		System.out.println("가위(0), 바위(1) 보(2) 입력 :");
+		int a = scan.nextInt();
+        
+		if (a==0) {
+			System.out.println("Player : 가위");
+			}
+		if (a==1) {
+			System.out.println("Player : 바위");
+			}
+		if (a==2) {
+			System.out.println("Player : 보");
+			}
+		
+		//컴퓨터
+		int com=(int)(Math.random()*3);
+		if(com==0)
+		{
+			System.out.println("컴퓨터 : 가위");
+		}
+		if(com==1)
+		{
+			System.out.println("컴퓨터 : 바위");
+		}
+		if(com==2)
+		{
+			System.out.println("컴퓨터 : 보");
+		}
+		
+		//결과를 비교
+		/*
+		 * 컴퓨터 : com
+		 *    가위 => 0
+		 *           사용자 : user
+		 *           가위 => 0 => 0
+		 *           바위 => 1 => -1
+		 *           보    => 3 => -2
+		 *           
+		 *    바위 => 1
+		 *           사용자 :user
+		 *           가위 => 0  =>1
+		 *           바위 => 1  =>0
+		 *           보    => 2  =>(-1)
+		 *    
+		 *    보   => 2
+		 *           사용자 : user  -2,1
+		 *           가위 => 0  =>(2)  -1,2
+		 *           바위 => 1  => 1
+		 *           보    => 2  => 0
+		 */
+		
+		//컴퓨터가 가위일 때
+		// ""문자열은 ==으로 비교가 불가능 => equals()
+		//중첩 조건문
+		if(com==0) 
+		{
+			if(a==0)
+			{
+				System.out.println("비겼습니다.");
+			}
+			if(a==1) 
+			{	
+				System.out.println("Player 이김 ㅊㅊ");
+			}
+			if(a==2) 
+			{	
+				System.out.println("컴퓨터가 이김 ㅜㅜㅋ");
+			}
+		}
+		
+		//컴퓨터가 바위일 때
+		if(com==1) {
+			if(a==0)
+			{
+				System.out.println("컴퓨터가 이김 ㅜㅜㅋ");
+			}
+			if(a==1) 
+			{	
+				System.out.println("비겼습니다.");
+			}
+			if(a==2) 
+			{	
+				System.out.println("Player 이김 ㅊㅊ");
+			}			
+		}
+		//컴퓨터가 보 일때
+		if(com==2) {
+			if(a==0)
+			{
+				System.out.println("Player 이김 ㅊㅊ");
+			}
+			if(a==1) 
+			{	
+				System.out.println("컴퓨터가 이김 ㅜㅜㅋ");
+			}
+			if(a==2) 
+			{	
+				System.out.println("비겼습니다.");
+			}
+		}
+
+
+
