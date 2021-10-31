@@ -1,0 +1,282 @@
+# edu
+
+1. Object 클래스란?
+모든 인스턴스 객체의 최상위 부모이고,
+모든 클래스는 Object 클래스를 상속 받는다.
+컴파일러가 자동으로 클래스명에 extends Object 을 넣어 준다.
+Object 클래스의 메소드에는
+	equals(Object )
+	toString()
+	hashCode
+  
+2. 아래의 소스코드에 대하여 아래와 같이 출력되는 이유는?
+출력
+A@28a418fc
+==============
+class A{
+}
+
+public class Test {
+	public static void main(String[] args) {
+		A a = new A();
+		System.out.println(a); // String s = String.valueOf(x); -> s가 주소 뿌림
+	}
+}
+
+	인스턴스 참조변수가 println 에 입력이 되면, 
+	obj.toString(Object obj) 를 호출되는데,
+	여기 toString() 안의
+		"클래스이름@해쉬코드" 스트링이 출력된다.
+		// getClass().getName() + "@" + Integer.toHexString(hashCode())
+####	주의: 
+####		입력: 없음
+####		리턴: String
+
+참고(호출) : 
+	(1) System.out.println(a)
+	
+	(2)
+		public void print(Object obj) {	
+		
+			write(String.valueOf(obj));
+			
+		}
+	(3)	
+		public static String valueOf(Object obj) {
+			return (obj == null) ? "null" : obj.toString();
+		}	
+	(4)
+		public String toString() {
+			return getClass().getName() + "@" + Integer.toHexString(hashCode());
+		}
+    
+3. class이름 및 함수에서 final의 의미는?
+final 클래스명 :  상속이 불가능함을 의미 함.
+final 함수명 : 	오버라이딩이 불가능한 함수임을 의미함.
+
+4.아래의 Main돌아 가도록 프로그래밍 하시오.
+interface Printable { // MS가 정의하고 제공한 인터페이스
+	public void print(String doc);
+}
+
+	//SPrinterDriver 와 LPrinterDriver를 만드시오
+	public static void main(String[] args) {
+		String myDoc = "This is a report about...";
+
+		// 삼성 프린터로 출력
+		Printable prn = new SPrinterDriver();
+		prn.print(myDoc);
+		System.out.println();
+
+		// LG 프린터로 출력
+		prn = new LPrinterDriver();
+		prn.print(myDoc);
+	}
+
+/*
+출력: 
+From Samsung printer
+This is a report about ...
+From LG printer
+This is a report about ...
+*/
+
+//SPrinterDriver 와 LPrinterDriver를 만드시오
+public class Test1 {
+	public static void main(String[] args) {
+		
+		String myDoc = "This is a report about...";
+
+		// 삼성 프린터로 출력
+		Printable prn = new SPrinterDriver();
+		prn.print(myDoc);
+		System.out.println();
+
+		// LG 프린터로 출력
+		prn = new LPrinterDriver();
+		prn.print(myDoc);
+		
+	}
+}
+
+interface Printable { // MS가 정의하고 제공한 인터페이스
+	public void print(String doc);
+}
+
+class SPrinterDriver implements Printable{
+	// 주의 : public 붙이기
+	// 주의 : 이것도 Override에 해당함
+	@Override
+	public void print(String doc){
+		System.out.println("From Samsung printer");
+		System.out.println(doc);
+	}
+}
+
+class LPrinterDriver implements Printable{
+	// 주의 : public 붙이기
+	// 주의 : 이것도 Override에 해당함
+	@Override
+	public void print(String doc){
+		System.out.println("From LG printer");
+		System.out.println(doc);
+	}
+}
+
+5. @Override 에 대하여 설명하시오.
+annotation이라고 부르며,
+@Override을	오버라이딩한 메소드명 위에 붙여주면, 
+메소드가 오버라이드 된것임을 컴파일러에게 알려주어
+컴파일러가 오버라이드 검사를 하도록 해 준다.	
+
+6. interface 에 대하여 설명해 보시오.
+interface안에는 함수내용은 없고 함수선언부만 있다.
+		함수내용은 interface를 상속받은 자식안에서
+		구현을 해야 한다.
+
+interface안에는 생성자가 없다.
+
+"클래스명 implments 인터페이스명" 
+형태를 통해서 상속을 받는다.
+
+interface로 부터 상속 받은 클래스는
+객체 생성시
+interface 부분은 메모리에 생성이 되지 않는다.
+( 클래스로 부터 상속받은 클래스의 객체생성과 다르다. )
+
+interface에 있는 함수명 앞의 public abstract 은 생략이 가능하다.
+( 생략하면 자동으로 컴파일러가 넣어 준다.)
+
+7.interface 안에 올 수 있는 것은 두가지를 말해 보시오?
+
+상수와 메소드
+
+클래스는 필드,
+생성자, 메소드를 구성 멤버로 가지는데 비해
+인터페이스는 상수 와  메소드만을 구성 멤버로 가진다.
+인터페이스는	객체로 생성할 수 없기 때문에 생성자를 가질 수 없다.
+  
+8. abstract 키워드란?
+
+abstract은 추상을 의미하는 키워드 이고,
+abstract로 메소드와, 클래스를 표현할수 있으며,
+abstract이 붙은 메소드및 클래스는 객체를 생성할 수가 없음.
+
+이 abstract 가 붙은 메소드 및 클래스의 존재 의의는
+상속을 통한 완성이며,
+상속에 대한 틀을 정의 하기 위해서 사용 됨.
+
+추상 메소드(abstract method)란
+	상속을 통해서,
+	자식 클래스에서 반드시 오버라이딩해야만 
+	사용할 수 있는 메소드를 의미합니다
+	( 자식클래스에서 함수내용을 구현 필수 )
+  
+9.아래의 결과가 나오도록 프로그래밍 하시오.
+Object obj = new Circle(10);
+System.out.println(obj);
+
+//출력: 넓이는 314.134 입니다. (예시)
+
+public class Test1 {
+	public static void main(String[] args) {
+		Object obj = new Circle(10);
+		System.out.println(obj);
+	}
+}
+//
+// 주의 : 기본적으로 Circle extends Object 임. 
+//		(extends Object 은 컴파일러가 자동으로 넣어줌)
+//      모든 객체의 최고 조상은 Object 임.
+//
+class Circle{
+	private int r;
+	Circle(int r){
+		this.r = r;
+	}
+	//
+	//  주의 : @Override 붙여서 사용하기 습관, 꼭 앞에 public 붙이기
+	//
+	@Override
+	public String toString() {
+		return "출력:넓이는" + r*r*Math.PI + "입니다.";
+	}
+}
+
+10. 아래의 프로그래밍을 하시오.
+아래의 인터페이스에 맞추어(상속하여) 아래를 프로그래밍 하시오.
+Circle, Rectangle , Triangle
+
+interface AreaGetable{
+	double getArea();
+}
+
+main(){
+	AreaGetable area = new Circle(4);
+	sysout(area.getArea())
+
+	area = new Rectangle(4,5);
+	sysout(area.getArea())
+
+	area = new Triangle(4,5);
+	sysout(area.getArea())
+}
+
+public class Test1 {
+	public static void main(String[] args) {
+		AreaGetable area = new Circle(4);
+		System.out.println(area.getArea());
+
+		area = new Rectangle(4,5);
+		System.out.println(area.getArea());
+
+		area = new Triangle(4,5);
+		System.out.println(area.getArea());
+	}
+}
+
+interface AreaGetable{
+	//
+	// 주의 : Abstract 가 있는 것.
+	//
+	double getArea();
+}
+
+class Circle implements AreaGetable{
+	private int r;
+	Circle(int r){
+		this.r = r;
+	}
+	//
+	// 주의 : 꼭 public 사용
+	//
+	public double getArea(){
+		return r*r*Math.PI;
+	}
+}
+class Rectangle implements AreaGetable{
+	private int w,h;
+	Rectangle(int w, int h){
+		this.w = w;
+		this.h = h;
+	}
+	//
+	// 주의 : 꼭 public 사용
+	//	
+	public double getArea(){
+		return w*h;
+	}
+}
+class Triangle implements AreaGetable{
+	private int w,h;
+	Triangle(int w, int h){
+		this.w = w;
+		this.h = h;
+	}
+	//
+	// 주의 : 꼭 public 사용
+	//	
+	public double getArea(){
+		return w*h/2;
+	}
+}
