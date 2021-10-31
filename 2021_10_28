@@ -1,0 +1,169 @@
+# edu
+
+1. 에러(Error)와 예외(Exception)의 차이는?
+에러(error): 프로그램을 코딩할때 해결할수 없는 걸 오류라고한다
+virtualMachineError: 가상머신에 심각한 오류 발생
+IOError:입출력 관련해서 코드 수준 복구가 불가능한 오류 발생
+
+예외(Exception):프로그램을 코딩할 때 수습할 수 있는 오류를 뜻하며 VM이 예외객체를 만들고 호출한 함수쪽으로 되돌려준다
+try catch 또는 throws 익셉션 이름 등을 사용하여 처리가능하다
+
+2. unchecked 와 checked 예외의 차이는?
+unchecked: 예외처리를 따로 안해주어도 되고 실행중 생기는 에러이다.
+checked: 예외처리를 코딩상으로 안하게 되면 컴파일이 안된다 작성단계에서 확인할수있고 try catch,throws로 처리가능하다
+
+3. throws 에 대하여 설명하시오.
+throws을 함수 이름뒤에 붙여주면 함수를 호출 하는 곳에서 exception을 try catch로 처리하는 의미
+
+4. 아래가 컴파일 에러가 나는 이유에 대하여 설명하시오.
+try {
+		int num = 6 / 0;
+} catch (Exception e) {
+		e.printStackTrace();
+} catch (InputMismatchException e) {
+		e.printStackTrace();
+}
+Exception 이 InputMismatchException 의 부모클래스 이므로
+catch( Exception e) 문만 타고,
+catch (InputMismatchException e)문은 진입하지 않으므로(진입할 일이 없음)발생하는 에러이다.
+
+에러 발생 위치 : InputMismatchException
+에러 메시지  :  Unreachable catch block for InputMismatchException. 
+		     It is already handled by the catch block for Exception
+
+상속관계:
+	Exception
+	<-	RuntimeException
+		<-	NoSuchElementException
+			<-	InputMismatchException
+
+
+5. 사칙연산 계산기를 아래의 조건으로 짜시오.
+interface ICalculator {
+	int add(int x, int y);
+	int sub(int x, int y);
+	int mul(int x, int y);
+	int div(int x, int y);
+}
+
+public class CalculatorMain {
+
+	public static void main(String[] args) {
+		ICalculator cal = new Calculator();
+
+		//출력결과 참고 하여 try catch 를 적절히 넣을것  
+			System.out.println(cal.add(6, 5));
+			System.out.println(cal.sub(6, 5));	
+			System.out.println(cal.mul(6, 5));	
+			System.out.println(cal.div(6, 0));
+
+	}
+}
+
+public class Test6 {
+
+	public static void main(String[] args) {
+
+		ICalculator cal = new Calculator();
+
+		//출력결과 참고 하여 try catch 를 적절히 넣을것  
+			System.out.println(cal.add(6, 5));
+			System.out.println(cal.sub(6, 5));	
+			System.out.println(cal.mul(6, 5));	
+			System.out.println(cal.div(6, 0));
+	}
+
+}
+
+interface ICalculator {
+	int add(int x, int y);
+	int sub(int x, int y);
+	int mul(int x, int y);
+	int div(int x, int y);
+}
+
+class Calculator implements ICalculator{
+	
+	public int add(int x, int y){
+		return x+y;
+	}
+	public int sub(int x, int y){
+		return x-y;
+	}
+	public int mul(int x, int y){
+		return x*y;
+	}
+	
+	public int div(int x, int y){
+		int res=0;
+		try {
+			res = x/y;
+		}
+		//catch(Throwable e) {
+		catch(Exception e) {
+			e.printStackTrace();
+			
+			// test  
+				//	catch(Exception e) {  
+				//	System.out.println(e.getMessage()); <-- 사용시 
+				//	/ by zero		<--결과 : 만 나온다.
+			System.out.println("계산기 종료");
+		}
+		return res;
+	}
+
+}
+
+/*
+================================================
+11
+1
+30
+java.lang.ArithmeticException: / by zero
+	at Calculator.div(CalculatorMain.java:32)
+	at CalculatorMain.main(CalculatorMain.java:45)
+계산기 종료
+*/
+
+6.과일, 사과, 배, 포도를 표현한 클래스를 만들고 이들 간의 관계를 고려하여 하나의 클래스를 추상 클래스로 만들어 메소드 print()를 구현하고 
+다음과 같은 소스와 결과가 나오도록 클래스를 작성하시오.
+- 소스
+Fruit fAry[] = {new Grape(), new Apple(), new Pear());
+for(Fruit f : fAry)
+f.print();
+
+- 결과
+나는 포도이다.
+나는 사과이다.
+나는 배이다.
+
+public class Test7 {
+
+	public static void main(String[] args) {
+
+		Fruit fAry[] = {new Grape(), new Apple(), new Pear()};
+		for(Fruit f : fAry)
+			f.print();
+	}
+}
+
+abstract class Fruit{
+	public abstract void print();
+}	
+
+class Grape extends Fruit{
+	public void print() {
+		System.out.println("나는 포도이다.");
+	}
+}
+class Apple extends Fruit{
+	public void print() { 
+		System.out.println("나는 사과이다.");
+	}
+}
+class Pear extends Fruit{
+	public void print() {
+		System.out.println("나는 배이다.");
+	}
+}
+
