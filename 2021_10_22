@@ -1,0 +1,263 @@
+# edu
+
+1. is a 관계와 has a 관계란?
+~~는 ~~이다 의 관계
+ex 노트북은 컴퓨터이다.전기자동차는 자동차이다.
+그니까 맞는말만 된다
+
+2.다형성(polymorphism)이란 무엇인가?
+
+나의 코드가 여러 자료형으로 구현되어 실행되는 것
+같은 코드에서 여러 실행 결과가 나옴(여러 형태를 가질 수 있는 능력)
+정보은닉, 상속과 더불어 객체지향 프로그래밍의 가장 큰 특징 중 하나
+객체지향 프로그래밍의 유연성, 재활용성, 유지보수성에 기본이 되는 특징임
+자바에서 조상클래스 타입의 참조변수로 자손클래스의 인스턴스를 참조할 수 있도록 했다.
+
+3. 아래가 되지 않는 이유에 대하여 설명하시오.
+
+//MobilePhone(부모) SmartPhone(자식)
+
+SmartPhone ph2 = new MobilePhone();
+
+부모에서 자식은 상속받은 관계이기 때문에 가능하지만 
+반대로 자식이 가진건 부모가 가지진않았기때문에 오류가난다
+
+4.메소드 오버라이딩(Overriding) 이란?
+
+상위 클래스의 메서드를 하위클래스가 재정의 하는 것이다.
+메서드의 이름은 물론 파라미터의 갯수나 타입도 동일해야 하며 
+주로 상위 클래스의 동작을 상속 받은 하위 클래스에서 변경하기 위해 사용된다.
+
+5. 갬블링 게임을 만들어 보자. (문제 5번 과 6번은 상속은 안써도됨)
+두 사람이 게임을 진행한다. 
+이들의 이름을 키보드로 입력 받으며 
+각 사람은 Person 클래스로 작성하라. 
+그러므로 프로그램에는 2개의 Person 객체가 생성되어야 한다.
+
+ 두 사람은 번갈아 가면서 게임을 진행하는데 
+각 사람이 자기 차례에서 <Enter> 키를 입력하면, 
+3개의 난수가 발생되고 이 숫자가 모두 같으면 승자가 되고 
+게임이 끝난다.
+ 난수의 범위를 너무 크게 잡으면 3개의 숫자가 
+일치하게 나올 가능성이 적기 때문에 숫자의 범위는 
+1~3까지로 한다.
+=========================
+1번째 선수 이름>>수희
+2번째 선수 이름>>연수
+[수희]:
+3  1  1  아쉽군요!
+[연수]:
+3  1  3  아쉽군요!
+[수희]:
+2  2  1  아쉽군요!
+[연수]:
+1  1  2  아쉽군요!
+[수희]:
+3  3  3  수희님이 이겼습니다!
+
+import java.util.Scanner;
+public class PersonGame {
+
+	public static void main(String[] args) {
+
+		Person[] person = new Person[2];
+		Scanner sc = new Scanner(System.in);
+		String str;
+		
+		for(int i=0; i<person.length; i++) {
+			person[i] = new Person();
+			System.out.print((i+1) + "번째 선수 이름>>");
+			str = sc.next();
+			person[i].setName(str);
+		}
+		
+		// 주의 : ??왜 사용, 위에서 입력받은 스트링이 , 스트링 + \n 나눠서 , 2번 전달 되는건가?
+		sc.nextLine();
+		
+		int i = 0;
+		while(true) {
+			System.out.print("[" + person[i].getName() + "]:");
+			
+			// 주의 :  어떻게 기달렸다가 돌릴수 있을까?,  Enter키 만을 입력하면 넘어가게 할려면? 
+			str=sc.nextLine();
+			if(!str.equals(""))
+				continue;
+				
+			if(person[i].startGame()) {
+				sc.close();
+				break;
+			}
+			i = i  ^ 1;
+		}
+
+	}
+
+}
+
+
+class Person{
+	private String name;
+	private int[] nary = new int[3]; 
+	
+//	Person(String name){
+//		this.name = name;
+//	}
+	
+	void setName(String name) {
+		this.name = name;
+	}
+	String getName() {
+		return this.name;
+	}
+	
+	boolean game() {
+		int cnt = 0;
+		boolean win = false;
+		for(int i=0; i<nary.length ; i++) {
+			nary[i] = (int)(Math.random()*3 + 1);
+			System.out.print(nary[i] + " ");
+		}
+		
+		for(int i=0; i<nary.length-1 ; i++) {
+			if(nary[i] == nary[i+1]) {
+				cnt++;
+			}
+		}
+		if(cnt == nary.length-1)
+			win = true;
+		
+		return win;
+	}
+	
+	boolean startGame() {
+		
+		if(	game()) {
+			System.out.println(getName() + "님이 이겼습니다!");
+			return true;
+		}else {
+			System.out.println("  아쉽군요!");
+			return false;
+		}
+
+	}
+}
+
+6. 프로그래밍
+
+문제 5의 갬블링 게임을 n명이 하도록 수정하라.
+실행 예시와 같이 게임에 참여하는 선수의 수를 입력 받고 각 선수의 이름을 
+입력 받도록 수정하라.
+
+겜블링 게임에 참여할 선수 숫자>>3
+1번째 선수 이름>>황
+2번째 선수 이름>>이
+3번째 선수 이름>>김
+[황]:
+2  3  3  아쉽군요!
+[이]:
+1  2  2  아쉽군요!
+[김]:
+2  2  3  아쉽군요!
+[황]:
+3  2  2  아쉽군요!
+[이]:
+1  1  3  아쉽군요!
+[김]:
+2  2  1  아쉽군요!
+[황]:
+2  2  2  황님이 이겼습니다!
+
+import java.util.Scanner;
+
+public class PersonGame {
+
+	public static void main(String[] args) {
+
+		
+		Scanner sc = new Scanner(System.in);
+		String str;
+		
+		System.out.println("겜블링 게임에 참여할 선수 숫자>>");
+		int pcnt = sc.nextInt();
+		Person[] person = new Person[pcnt];
+		
+		for(int i=0; i<person.length; i++) {
+			person[i] = new Person();
+			System.out.print((i+1) + "번째 선수 이름>>");
+			str = sc.next();
+			person[i].setName(str);
+		}
+		
+		// 주의 : ??왜 사용, 위에서 입력받은 스트링이 , 스트링 + \n 나눠서 , 2번 전달 되는건가?
+		sc.nextLine();
+		
+		int i = 0;
+		int k = 0;
+		while(true) {
+			k = i % person.length;
+			i++;
+			System.out.print("[" + person[k].getName() + "]:");
+			
+			// 주의 :  어떻게 기달렸다가 돌릴수 있을까?,  Enter키 만을 입력하면 넘어가게 할려면? 
+			str=sc.nextLine();
+			if(!str.equals(""))
+				continue;
+				
+			if(person[k].startGame()) {
+				sc.close();
+				break;
+			}
+
+		}
+
+	}
+
+}
+
+
+class Person{
+	private String name;
+	private int[] nary = new int[3]; 
+	
+//	Person(String name){
+//		this.name = name;
+//	}
+	
+	void setName(String name) {
+		this.name = name;
+	}
+	String getName() {
+		return this.name;
+	}
+	
+	boolean game() {
+		int cnt = 0;
+		boolean win = false;
+		for(int i=0; i<nary.length ; i++) {
+			nary[i] = (int)(Math.random()*3 + 1);
+			System.out.print(nary[i] + " ");
+		}
+		
+		for(int i=0; i<nary.length-1 ; i++) {
+			if(nary[i] == nary[i+1]) {
+				cnt++;
+			}
+		}
+		if(cnt == nary.length-1)
+			win = true;
+		
+		return win;
+	}
+	
+	boolean startGame() {
+		
+		if(	game()) {
+			System.out.println(getName() + "님이 이겼습니다!");
+			return true;
+		}else {
+			System.out.println("  아쉽군요!");
+			return false;
+		}
+
+	}
+}
